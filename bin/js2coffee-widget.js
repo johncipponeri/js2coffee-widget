@@ -41,7 +41,7 @@ function js2cs(js_element, id) {
                 "<li><a id='cs-link" + id + "'>CoffeeScript</a></li>\n" +
             "</ul>\n" +
         "</div>\n" +
-        "<div id='output' data-border-style='none' data-header='true' style='height: 139px;'>\n" +
+        "<div id='output' data-border-style='none' data-header='true'>\n" +
             "<div id='js-box" + id + "' class='code-box js-box active'></div>\n" +
             "<div id='cs-box" + id + "' class='code-box cs-box'></div>\n" +
         "</div>\n";
@@ -67,7 +67,7 @@ function cs2js(cs_element) {
                 "<li><a id='cs-link" + id + "' class='active'>CoffeeScript</a></li>\n" +
             "</ul>\n" +
         "</div>\n" +
-        "<div id='output' data-border-style='none' data-header='true' style='height: 139px;'>\n" +
+        "<div id='output' data-border-style='none' data-header='true'>\n" +
             "<div id='js-box" + id + "' class='code-box js-box'></div>\n" +
             "<div id='cs-box" + id + "' class='code-box cs-box active'></div>\n" +
         "</div>\n";

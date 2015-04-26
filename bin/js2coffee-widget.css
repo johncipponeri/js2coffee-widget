@@ -108,3 +108,7 @@ pre {
 .code-box {
   position: relative;
 }
+
+.j2cw-js, .j2cw-cs {
+    margin-bottom: 34px;   
+}
