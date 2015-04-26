@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="http://blog.robomatix.net/squelettes/bootstrap/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="http://blog.robomatix.net/squelettes/bootstrap/css/bootstrap-theme.css" type="text/css" />
     <meta name="generator" content="SPIP 3.0.14 [21141]" />
-
+    
     <!-- js2coffee-widget -->
     <link rel="stylesheet" href="../dist/js2coffee-widget.min.css">
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
@@ -239,8 +239,36 @@ href="+-Exemple-+">Exemple</a></span></h5>
                             <h3 class="spip">A search of the solution</h3>
                             <p>Not finding what I really wanted in the examples provided with Phaser 1.1.6, I decided to do some research ... I came by chance on an example in <a href="https://blogs.oracle.com/geertjan/entry/phaser_and_netbeans_ide_part" class='spip_out' rel='external'>a blog article</a> in the news of the <a href="http://phaser.io/" class='spip_out' rel='external'>Phaser official website</a>. And then I remembered the example of texture change proposed in the examples provided by Photon with Phaser 1.1.6 ... Finally, understanding certain principles and learned some syntax, I began to explore the documentation seeking certain keywords ... I was not disappointed and reading the documentation, I found a way to do what I wanted. Everything was here ! It only remained for me to write the script !</p>
                             <h3 class="spip">My solution for a change before the kill animation in a game made ​​with Phaser 1.1.6</h3>
-                            <div class="j2cw-js" style="height: 475px;">var game = new Phaser.Game(500, 500, Phaser.AUTO, '', {preload: preload, create: create, update: update}); function preload() { /**************************************/ /* Preloading the Sprite Sheets */ // Preloading a Sprite Sheet ('key', 'urlBase', width (px), height (px), frames ) game.load.spritesheet('bomber', 'assets/pics/enemy-bomber-1.png', 60, 40, 3); game.load.spritesheet('bomberExplode', 'assets/pics/enemy-bomber-1-explode.png', 60, 40, 4); } function create() { // Creating the sprite using the Sprite Sheet bomber ( x, y, key (name of the Sprite Sheet) ) player = game.add.sprite(220, 230, 'bomber'); // Adding an animation ( 'key' ) player.animations.add('blink'); // Playing an animation ( 'key', frameRate, loop ) player.animations.play('blink', 3, true); // To call the function explodeBomber() when clicking on the game area game.input.onDown.addOnce(explodeBomber, this); } function update() { // Necessary to make it work ! } function explodeBomber() { // To load the new texture (('key', frame)) player.loadTexture('bomberExplode', 0); // Adding an animation ( 'key' ) player.animations.add('explode'); // To play the animation with the new texture ( 'key', frameRate, loop, killOnComplete) player.animations.play('explode', 7, false, true); }
-                            </div>
+                            <div class="j2cw-js" style="height: 475px;">var game = new Phaser.Game(500, 500, Phaser.AUTO, '', {preload: preload, create: create, update: update});
+function preload() {
+    /**************************************/
+    /* Preloading the Sprite Sheets */
+    // Preloading a Sprite Sheet ('key', 'urlBase', width (px), height (px), frames )
+    game.load.spritesheet('bomber', 'assets/pics/enemy-bomber-1.png', 60, 40, 3);
+    game.load.spritesheet('bomberExplode', 'assets/pics/enemy-bomber-1-explode.png', 60, 40, 4);
+}
+function create() {
+    // Creating the sprite using the Sprite Sheet bomber ( x, y, key (name of the Sprite Sheet) )
+    player = game.add.sprite(220, 230, 'bomber');
+    // Adding an animation ( 'key' )
+    player.animations.add('blink');
+    // Playing an animation ( 'key', frameRate, loop )
+    player.animations.play('blink', 3, true);
+    // To call the function explodeBomber() when clicking on the game area
+    game.input.onDown.addOnce(explodeBomber, this);
+}
+function update() {
+    // Necessary to make it work !
+}
+function explodeBomber() {
+    // To load the new texture (('key', frame))
+    player.loadTexture('bomberExplode', 0);
+    // Adding an animation ( 'key' )
+    player.animations.add('explode');
+    // To play the animation with the new texture ( 'key', frameRate, loop, killOnComplete)
+    player.animations.play('explode', 7, false, true);
+}
+                           </div>
                             <h3 class="spip">My solution explained in detail</h3>
                             <p>For animation, <a href="http://en.wikipedia.org/wiki/Sprite_sheet)" class='spip_out' rel='external'>sprite sheets</a> are used. Basically, it is a set of images combined into one that we will successively display.
                                 <br class='autobr' />Below 2 examples of Sprite Sheets. These are the ones used in my example.</p>
@@ -258,14 +286,28 @@ src='http://blog.robomatix.net/local/cache-vignettes/L60xH160/enemy-bomber-1-exp
                             </div>
                             <p>This line means that it preloads a sprite sheet. &#8217;bomber&#8217; is the name or key used to spot it. Attention, the name or key must be surrounded by &#8217;. Here we load the image &#8217;enemy-bomber-1.png&#8217; sub directory &#8217;pics&#8217; of the &#8217;assets&#8217; directory. The part that is visible has a width of 60 pixels and a height of 40. This sprite sheet has up to 3 images. For your information, the image-enemy bomber-1.png is the first sprite sheet exemplified.</p>
                             <p>Then, in the update function, we will put a few lines of code to create the first animation.</p>
-                            <div class="j2cw-js" style="height: 200px;">// Creating the sprite using the Sprite Sheet bomber ( x, y, key (name of the Sprite Sheet) ) player = game.add.sprite(220, 230, 'bomber'); // Adding an animation ( 'key' ) player.animations.add('blink'); // Playing an animation ( 'key', frameRate, loop ) player.animations.play('blink', 3, true); // To call the function explodeBomber() when clicking on the game area game.input.onDown.addOnce(explodeBomber, this);
+                            <div class="j2cw-js" style="height: 200px;">// Creating the sprite using the Sprite Sheet bomber ( x, y, key (name of the Sprite Sheet) )
+player = game.add.sprite(220, 230, 'bomber');
+// Adding an animation ( 'key' )
+player.animations.add('blink');
+// Playing an animation ( 'key', frameRate, loop )
+player.animations.play('blink', 3, true);
+// To call the function explodeBomber() when clicking on the game area
+game.input.onDown.addOnce(explodeBomber, this);
                             </div>
                             <p>At line 2, the <a href="http://en.wikipedia.org/wiki/Sprite_sheet)" class='spip_out' rel='external'>sprite</a> is added via the constructor <a href="http://robomatix.net/documentations/ phaser/v-1-1-6/Phaser.Sprite.html" class='spip_out' rel='external'>sprite</a> 220 pixels from the left and 230 pixels from the top. It uses the sprite sheet &#8217;bomber&#8217; previously loaded. This is referenced by the variable player.</p>
                             <p>At line 4, is added (<a href="http://robomatix.net/documentations/phaser/v-1-1-6/Phaser.AnimationManager.html # toc15" class='spip_out' rel='external'>add</a>) to player, an animation that will be called &#8217;blink&#8217;.</p>
                             <p>In line 6, we start the animation (<a href="http://robomatix.net/documentations/phaser/v-1-1-6/Phaser.AnimationManager.html # toc18" class='spip_out' rel='external'>play</a>), the first parameter is the name reference animation to play. The parameter 3 is the framerate, wich is the number of images displayed in 1 second. The third parameter true means that the animation looped.</p>
                             <p>Line 8 calls the function explodeBomber when you click on the playground. I will not go into detail, it is not the subject of the example.</p>
                             <p>Now, in the explodeBomber function, we will change the animation before killing it...</p>
-                            <div class="j2cw-js" style="height: 200px;">function explodeBomber() { // To load the new texture (('key', frame)) player.loadTexture('bomberExplode', 0); // Adding an animation ( 'key' ) player.animations.add('explode'); // To play the animation with the new texture ( 'key', frameRate, loop, killOnComplete) player.animations.play('explode', 7, false, true); }
+                            <div class="j2cw-js" style="height: 200px;">function explodeBomber() {
+    // To load the new texture (('key', frame))
+    player.loadTexture('bomberExplode', 0);
+    // Adding an animation ( 'key' )
+    player.animations.add('explode');
+    // To play the animation with the new texture ( 'key', frameRate, loop, killOnComplete)
+    player.animations.play('explode', 7, false, true);
+}
                             </div>
                             <p>In line 3, a sprite sheet (<a href="http://robomatix.net/documentations/phaser/v-1-1-6/Phaser.Sprite.html # toc60" class='spip_out' rel='external'>LoadTexture</a>) is loaded and preloaded previously identified by the key &#8217;bomberExplode&#8217;. We chose to display the first image from the second parameter as 0.</p>
                             <p>In line 5, an animation is added to the player as previously indicated.</p>
