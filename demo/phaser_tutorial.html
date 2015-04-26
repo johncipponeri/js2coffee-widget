@@ -1,0 +1,325 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+
+<head>
+    <title>Phaser : Example of a texture change before killing an animation - L'espace web de Robomatix Rebirth</title>
+    <meta name="description" content=" My need: change the animation of a sprite before killing it in a game made &#8203;&#8203;with Phaser 1.1.6 For my One minute Shoot &#039;Em Up, I needed to make &#039; (...) " />
+    <link rel="canonical" href="http://blog.robomatix.net/Phaser-Example-of-a-texture-change" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="alternate" type="application/rss+xml" title="Subscribe to the whole site" href="spip.php?page=backend" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="http://blog.robomatix.net/squelettes/bootstrap/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="http://blog.robomatix.net/squelettes/bootstrap/css/bootstrap-theme.css" type="text/css" />
+    <meta name="generator" content="SPIP 3.0.14 [21141]" />
+    
+    <!-- js2coffee-widget -->
+    <link rel="stylesheet" href="../dist/js2coffee-widget.min.css">
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="../dist/js2coffee-widget.min.js"></script>
+</head>
+
+<body class="page_article">
+
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <header class="col-md-6 col-md-offset-3 page-header">
+                    <nav class="col-md-12">
+                        <h2><a
+href="http://blog.robomatix.net">L&#8217;espace web de Robomatix Rebirth</a> <small>Voici mon espace web dédié de tout ce que j’aime... Mes boites à bourdon et à bruit, mes figurines warmahordes et de la programmation de jeux vidéos et d&#8217;applications web...
+</small></h2>
+                    </nav>
+                </header>
+                <nav class="col-md-6 col-md-offset-3 navbar navbar-inverse" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active">
+                                <a href="-blog-">Blog</a>
+                            </li>
+                            <li>
+                                <a href="-Entretiens-">Entretiens</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projets <b
+class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="+-delirium-+">delirium</a>
+                                    </li>
+                                    <li><a href="+-Destructions-Constructives-+">Destructions Constructives</a>
+                                    </li>
+                                    <li><a href="+-Drone-+">Drone</a>
+                                    </li>
+                                    <li><a href="+-Dronoisium-+">Dronoisium</a>
+                                    </li>
+                                    <li><a href="+-Experimental-+">Expérimental</a>
+                                    </li>
+                                    <li><a href="+-Le-Carre-Noir-+">Le Carré Noir</a>
+                                    </li>
+                                    <li><a href="+-monobloc-+">MonobloC</a>
+                                    </li>
+                                    <li><a href="+-Noisy-+">Noisy</a>
+                                    </li>
+                                    <li><a href="+-One-minute-shoot-em-up-37-+">One Minute Shoot’ Em Up !</a>
+                                    </li>
+                                    <li><a href="+-r-r-+">R.R.</a>
+                                    </li>
+                                    <li><a href="+-Repeater-Electronics-+">Repeater Electronics</a>
+                                    </li>
+                                    <li><a href="+-sinux-+">Sinux</a>
+                                    </li>
+                                    <li><a href="+-Split-Album-+">Split Album</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Boites et Programmes Son <b
+class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="+-airbase99-+">AirBase99</a>
+                                    </li>
+                                    <li><a href="+-analogigue-+">Analogigue</a>
+                                    </li>
+                                    <li><a href="+-ardour-+">Ardour</a>
+                                    </li>
+                                    <li><a href="+-BCR2000-+">BCR2000</a>
+                                    </li>
+                                    <li><a href="+-bitrman-+">Bitrman</a>
+                                    </li>
+                                    <li><a href="+-Black-Label-Chorus-+">Black Label Chorus</a>
+                                    </li>
+                                    <li><a href="+-Bluesky-+">Bluesky</a>
+                                    </li>
+                                    <li><a href="+-DIN-+">DIN</a>
+                                    </li>
+                                    <li><a href="+-dual-vco-noisy-modules-+">Dual VCO Noisy Modules</a>
+                                    </li>
+                                    <li><a href="+-Fullbore-Metal-+">Fullbore Metal</a>
+                                    </li>
+                                    <li><a href="+-grand-orbiter-+">Grand Orbiter</a>
+                                    </li>
+                                    <li><a href="+-Hall-of-Fame-+">Hall of Fame</a>
+                                    </li>
+                                    <li><a href="+-idiotbox-+">IdiotBox</a>
+                                    </li>
+                                    <li><a href="+-jamin-+">JaMin</a>
+                                    </li>
+                                    <li><a href="+-Noise-Maker-2-+">Noise Maker 2</a>
+                                    </li>
+                                    <li><a href="+-Noisy-3-Ocillators-+">Noisy 3 Ocillators</a>
+                                    </li>
+                                    <li><a href="+-Nord-Modular-+">Nord Modular</a>
+                                    </li>
+                                    <li><a href="+-rvo-+">RVO</a>
+                                    </li>
+                                    <li><a href="+-rwm-+">RWM</a>
+                                    </li>
+                                    <li><a href="+-SD-400-+">SD-400</a>
+                                    </li>
+                                    <li><a href="+-Space-Eventide-+">Space Eventide</a>
+                                    </li>
+                                    <li><a href="+-Tune-in-Tokyo-+">Tune in Tokyo</a>
+                                    </li>
+                                    <li><a href="+-ufo-+">UFO</a>
+                                    </li>
+                                    <li><a href="+-verbzilla-+">Verbzilla</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Divers <b
+class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="+-Bagues-+">Bagues</a>
+                                    </li>
+                                    <li><a href="+-Bootstrap-+">Bootstrap</a>
+                                    </li>
+                                    <li><a href="+-cephalyx-+">Cephalyx</a>
+                                    </li>
+                                    <li><a href="+-eden-+">Eden</a>
+                                    </li>
+                                    <li><a href="+-Exemple-+">Exemple</a>
+                                    </li>
+                                    <li><a href="+-FAT-+">FAT</a>
+                                    </li>
+                                    <li><a href="+-HTML5-+">HTML5</a>
+                                    </li>
+                                    <li><a href="+-Jeu-+">Jeu</a>
+                                    </li>
+                                    <li><a href="+-khador-+">Khador</a>
+                                    </li>
+                                    <li><a href="+-ma-vie-d-artiste-+">Ma vie d&#8217;artiste</a>
+                                    </li>
+                                    <li><a href="+-Ma-vie-de-geek-+">Ma vie de geek</a>
+                                    </li>
+                                    <li><a href="+-martriarcat-+">Martriarcat</a>
+                                    </li>
+                                    <li><a href="+-memo-+">Memo</a>
+                                    </li>
+                                    <li><a href="+-micro-jeu-+">Micro Jeu</a>
+                                    </li>
+                                    <li><a href="+-modelisme-+">Modèlisme</a>
+                                    </li>
+                                    <li><a href="+-Node-JS-+">Node.JS</a>
+                                    </li>
+                                    <li><a href="+-noise-music-+">Noise Music</a>
+                                    </li>
+                                    <li><a href="+-ovh-+">OVH</a>
+                                    </li>
+                                    <li><a href="+-Phaser-1-+">Phaser 1.1</a>
+                                    </li>
+                                    <li><a href="+-Phaser-+">Phaser 2</a>
+                                    </li>
+                                    <li><a href="+-placard-+">Placard</a>
+                                    </li>
+                                    <li><a href="+-Responsiv-Design-+">Responsive Design</a>
+                                    </li>
+                                    <li><a href="+-shoot-em-up-+">Shoot &#8217; Em Up</a>
+                                    </li>
+                                    <li><a href="+-spip-+">SPIP</a>
+                                    </li>
+                                    <li><a href="+-SPIPR-+">SPIPR</a>
+                                    </li>
+                                    <li><a href="+-tablette-+">Tablette</a>
+                                    </li>
+                                    <li><a href="+-test-+">Test</a>
+                                    </li>
+                                    <li><a href="+-tournois-+">Tournois</a>
+                                    </li>
+                                    <li><a href="+-Tutoriel-+">Tutoriel</a>
+                                    </li>
+                                    <li><a href="+-Vimeo-+">Vimeo</a>
+                                    </li>
+                                    <li><a href="+-warmachine-+">Warmachine</a>
+                                    </li>
+                                    <li><a href="+-zpip-+">Zpip</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <main class="col-md-6 col-md-offset-3 ">
+                    <nav>
+                        <ol class="breadcrumb">
+                            <li><a href="http://blog.robomatix.net/">Home</a>
+                            </li>
+                            <li><a href="-blog-">Blog</a>
+                            </li>
+                            <li class="active">Phaser : Example of a texture change before killing an animation</li>
+                        </ol>
+                    </nav>
+                    <article class="panel panel-default">
+                        <div class="panel-heading">
+                            <h1>Phaser : Example of a texture change before killing an animation</h1>
+                            <p>Publié le
+                                <time datetime="2014-03-18 19:31:58" pubdate>Tuesday 18 March 2014</time>.</p>
+                            <h5>
+<span
+class="label label-primary"><a
+href="+-Phaser-1-+">Phaser 1.1</a></span>
+<span
+class="label label-primary"><a
+href="+-Exemple-+">Exemple</a></span></h5>
+                            <p class="well well-sm"><a href="Phaser-Exemple-changement-de" rel="alternate" hreflang="fr">fran&#231;ais</a>
+                            </p>
+                            <img class='img-responsive' alt='Phaser : Exemple changement de texture d&#039;une animation (...)' src="http://blog.robomatix.net/local/cache-vignettes/L1000xH750/arton26-a7f86.png" width='1000' height='750' />
+                        </div>
+                        <div class="panel-body">
+                            <h3 class="spip">My need: change the animation of a sprite before killing it in a game made ​​with Phaser 1.1.6</h3>
+                            <p>For my One minute Shoot &#8217;Em Up, I needed to make &#8217; flash&#8217; the enemy ship before removing it from the screen.</p>
+                            <h3 class="spip">A search of the solution</h3>
+                            <p>Not finding what I really wanted in the examples provided with Phaser 1.1.6, I decided to do some research ... I came by chance on an example in <a href="https://blogs.oracle.com/geertjan/entry/phaser_and_netbeans_ide_part" class='spip_out' rel='external'>a blog article</a> in the news of the <a href="http://phaser.io/" class='spip_out' rel='external'>Phaser official website</a>. And then I remembered the example of texture change proposed in the examples provided by Photon with Phaser 1.1.6 ... Finally, understanding certain principles and learned some syntax, I began to explore the documentation seeking certain keywords ... I was not disappointed and reading the documentation, I found a way to do what I wanted. Everything was here ! It only remained for me to write the script !</p>
+                            <h3 class="spip">My solution for a change before the kill animation in a game made ​​with Phaser 1.1.6</h3>
+                            <div class="j2cw-js" style="height: 475px;">var game = new Phaser.Game(500, 500, Phaser.AUTO, '', {preload: preload, create: create, update: update});
+function preload() {
+    /**************************************/
+    /* Preloading the Sprite Sheets */
+    // Preloading a Sprite Sheet ('key', 'urlBase', width (px), height (px), frames )
+    game.load.spritesheet('bomber', 'assets/pics/enemy-bomber-1.png', 60, 40, 3);
+    game.load.spritesheet('bomberExplode', 'assets/pics/enemy-bomber-1-explode.png', 60, 40, 4);
+}
+function create() {
+    // Creating the sprite using the Sprite Sheet bomber ( x, y, key (name of the Sprite Sheet) )
+    player = game.add.sprite(220, 230, 'bomber');
+    // Adding an animation ( 'key' )
+    player.animations.add('blink');
+    // Playing an animation ( 'key', frameRate, loop )
+    player.animations.play('blink', 3, true);
+    // To call the function explodeBomber() when clicking on the game area
+    game.input.onDown.addOnce(explodeBomber, this);
+}
+function update() {
+    // Necessary to make it work !
+}
+function explodeBomber() {
+    // To load the new texture (('key', frame))
+    player.loadTexture('bomberExplode', 0);
+    // Adding an animation ( 'key' )
+    player.animations.add('explode');
+    // To play the animation with the new texture ( 'key', frameRate, loop, killOnComplete)
+    player.animations.play('explode', 7, false, true);
+}
+                           </div>
+                            <h3 class="spip">My solution explained in detail</h3>
+                            <p>For animation, <a href="http://en.wikipedia.org/wiki/Sprite_sheet)" class='spip_out' rel='external'>sprite sheets</a> are used. Basically, it is a set of images combined into one that we will successively display.
+                                <br class='autobr' />Below 2 examples of Sprite Sheets. These are the ones used in my example.</p>
+                            <p><span class='spip_document_125 spip_documents spip_documents_center'>
+<img
+src='http://blog.robomatix.net/local/cache-vignettes/L60xH120/enemy-bomber-1-39634.png' width='60' height='120' alt="" /></span>
+                            </p>
+                            <p><span class='spip_document_126 spip_documents spip_documents_center'>
+<img
+src='http://blog.robomatix.net/local/cache-vignettes/L60xH160/enemy-bomber-1-explode-3f4e5.png' width='60' height='160' alt="" /></span>
+                            </p>
+                            <p>First, we preload the sprite sheets with the preload function.
+                                <br class='autobr' />And, through the method <a href="http://robomatix.net/documentations/phaser/v-1-1-6/Phaser.Loader.html toc43 #" class='spip_out' rel='external'>spritesheet</a> of load.</p>
+                            <div class="j2cw-js" style="height: 100px;">game.load.spritesheet('bomber', 'assets/pics/enemy-bomber-1.png', 60, 40, 3);
+                            </div>
+                            <p>This line means that it preloads a sprite sheet. &#8217;bomber&#8217; is the name or key used to spot it. Attention, the name or key must be surrounded by &#8217;. Here we load the image &#8217;enemy-bomber-1.png&#8217; sub directory &#8217;pics&#8217; of the &#8217;assets&#8217; directory. The part that is visible has a width of 60 pixels and a height of 40. This sprite sheet has up to 3 images. For your information, the image-enemy bomber-1.png is the first sprite sheet exemplified.</p>
+                            <p>Then, in the update function, we will put a few lines of code to create the first animation.</p>
+                            <div class="j2cw-js" style="height: 200px;">// Creating the sprite using the Sprite Sheet bomber ( x, y, key (name of the Sprite Sheet) )
+player = game.add.sprite(220, 230, 'bomber');
+// Adding an animation ( 'key' )
+player.animations.add('blink');
+// Playing an animation ( 'key', frameRate, loop )
+player.animations.play('blink', 3, true);
+// To call the function explodeBomber() when clicking on the game area
+game.input.onDown.addOnce(explodeBomber, this);
+                            </div>
+                            <p>At line 2, the <a href="http://en.wikipedia.org/wiki/Sprite_sheet)" class='spip_out' rel='external'>sprite</a> is added via the constructor <a href="http://robomatix.net/documentations/ phaser/v-1-1-6/Phaser.Sprite.html" class='spip_out' rel='external'>sprite</a> 220 pixels from the left and 230 pixels from the top. It uses the sprite sheet &#8217;bomber&#8217; previously loaded. This is referenced by the variable player.</p>
+                            <p>At line 4, is added (<a href="http://robomatix.net/documentations/phaser/v-1-1-6/Phaser.AnimationManager.html # toc15" class='spip_out' rel='external'>add</a>) to player, an animation that will be called &#8217;blink&#8217;.</p>
+                            <p>In line 6, we start the animation (<a href="http://robomatix.net/documentations/phaser/v-1-1-6/Phaser.AnimationManager.html # toc18" class='spip_out' rel='external'>play</a>), the first parameter is the name reference animation to play. The parameter 3 is the framerate, wich is the number of images displayed in 1 second. The third parameter true means that the animation looped.</p>
+                            <p>Line 8 calls the function explodeBomber when you click on the playground. I will not go into detail, it is not the subject of the example.</p>
+                            <p>Now, in the explodeBomber function, we will change the animation before killing it...</p>
+                            <div class="j2cw-js" style="height: 200px;">function explodeBomber() {
+    // To load the new texture (('key', frame))
+    player.loadTexture('bomberExplode', 0);
+    // Adding an animation ( 'key' )
+    player.animations.add('explode');
+    // To play the animation with the new texture ( 'key', frameRate, loop, killOnComplete)
+    player.animations.play('explode', 7, false, true);
+}
+                            </div>
+                            <p>In line 3, a sprite sheet (<a href="http://robomatix.net/documentations/phaser/v-1-1-6/Phaser.Sprite.html # toc60" class='spip_out' rel='external'>LoadTexture</a>) is loaded and preloaded previously identified by the key &#8217;bomberExplode&#8217;. We chose to display the first image from the second parameter as 0.</p>
+                            <p>In line 5, an animation is added to the player as previously indicated.</p>
+                            <p>In line 7, we start the animation for it is played once before killing it. To do this, some specific parameter are passed to the method <a href="http://robomatix.net/documentations/phaser/v-1-1-6/Phaser.AnimationManager.html # toc18" class='spip_out' rel='external'>play</a>. The first parameter is the name of the animation. Then the framerate which is the number of images per second, then false to say not to loop the animation and finally true indicating the killing of the animation. It therefore disappear from the playing area. Note that in order to kill animation, the third (loop) parameter must be set to false and the fourth (killOnComplete) to true. If these two parameters are true, it does not work.</p>
+                            <h3 class="spip">The last word</h3>
+                            <p>You will find <a href="https://github.com/robomatix/Phaser-example-animation-change-before-killing-it" class='spip_out' rel='external'>my solution Compete to download on my github</a>. You can the <a href="http://blog.robomatix.net/exemples/phaser-1-6-6-anim-puis-changement-texture-puis-kill-rr/index.html" class='spip_out'>try it on this page</a>. The picture of the vessel was originally created by Tsx. I slightly modified it to animate it ...</p>
+                            <p>Hoping that it will help other developers ...</p>
+                        </div>
+                    </article>
+                </main>
+            </div>
+        </div>
+    </body>
+
+</html>

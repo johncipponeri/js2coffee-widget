@@ -36,7 +36,7 @@ $(window).load(function() {
 function js2cs(js_element, id) {
     var widget =
         "<div class='embed-nav group' id='embed-nav'>\n" +
-            "<ul>\n" +
+            "<ul style='margin: 0'>\n" +
                 "<li><a id='js-link" + id + "' class='active'>JavaScript</a></li>\n" +
                 "<li><a id='cs-link" + id + "'>CoffeeScript</a></li>\n" +
             "</ul>\n" +
@@ -57,12 +57,15 @@ function js2cs(js_element, id) {
     
     // Add coffeescript code
     js_element.find("#cs-box" + id).html("\n" + compile(js_code).code);
+    
+    // Limit output height
+    js_element.find("#output").height(js_element.height() - js_element.find("#embed-nav").height());
 }
 
 function cs2js(cs_element) {
     var widget =
         "<div class='embed-nav group' id='embed-nav'>\n" +
-            "<ul>\n" +
+            "<ul style='margin: 0'>\n" +
                 "<li><a id='js-link" + id + "'>JavaScript</a></li>\n" +
                 "<li><a id='cs-link" + id + "' class='active'>CoffeeScript</a></li>\n" +
             "</ul>\n" +
@@ -77,12 +80,15 @@ function cs2js(cs_element) {
     
     // Replace code with widget
     cs_element.html(widget);
-    
+        
     // Add javascript code
     cs_element.find("#js-box" + id).html("\n" + compileReverse(cs_code).code);
     
     // Add coffeescript code
     cs_element.find("#cs-box" + id).html(cs_code);
+    
+    // Limit output height
+    cs_element.find("#output").height(cs_element.height() - cs_element.find("#embed-nav").height());
 }
 
 function addClickListeners(id) {       
