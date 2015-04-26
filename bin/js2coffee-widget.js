@@ -21,27 +21,29 @@ function addScript(src) {
 // Window Load (Run Second)
 $(window).load(function() {
     // Any JS examples?
-    if ($(".j2cw-js").length > 0)
-        js2cs($(".j2cw-js"));
+    //if ($(".j2cw-js").length > 0)
+    //    js2cs($(".j2cw-js"));
+    $(".j2cw-js").each(function(i, elem) {
+        js2cs($(this), i); 
+        addClickListeners(i);
+    });
     
     // Any CS examples?
-    if ($(".j2cw-cs").length > 0)
-        cs2js($(".j2cw-cs"));
-    
-    addClickListeners();
+    //if ($(".j2cw-cs").length > 0)
+    //    cs2js($(".j2cw-cs"));
 });
 
-function js2cs(js_element) {
+function js2cs(js_element, id) {
     var widget =
         "<div class='embed-nav group' id='embed-nav'>\n" +
             "<ul>\n" +
-                "<li><a id='js-link' class='active'>JavaScript</a></li>\n" +
-                "<li><a id='cs-link'>CoffeeScript</a></li>\n" +
+                "<li><a id='js-link" + id + "' class='active'>JavaScript</a></li>\n" +
+                "<li><a id='cs-link" + id + "'>CoffeeScript</a></li>\n" +
             "</ul>\n" +
         "</div>\n" +
         "<div id='output' data-border-style='none' data-header='true' style='height: 139px;'>\n" +
-            "<div id='js-box' class='code-box active'></div>\n" +
-            "<div id='cs-box' class='code-box'></div>\n" +
+            "<div id='js-box" + id + "' class='code-box js-box active'></div>\n" +
+            "<div id='cs-box" + id + "' class='code-box cs-box'></div>\n" +
         "</div>\n";
     
     // Get code to be converted
@@ -51,23 +53,23 @@ function js2cs(js_element) {
     js_element.html(widget);
     
     // Add javascript code
-    js_element.find("#js-box").html(js_code);
+    js_element.find("#js-box" + id).html(js_code);
     
     // Add coffeescript code
-    js_element.find("#cs-box").html("\n" + compile(js_code).code);
+    js_element.find("#cs-box" + id).html("\n" + compile(js_code).code);
 }
 
 function cs2js(cs_element) {
     var widget =
         "<div class='embed-nav group' id='embed-nav'>\n" +
             "<ul>\n" +
-                "<li><a id='js-link'>JavaScript</a></li>\n" +
-                "<li><a id='cs-link' class='active'>CoffeeScript</a></li>\n" +
+                "<li><a id='js-link" + id + "'>JavaScript</a></li>\n" +
+                "<li><a id='cs-link" + id + "' class='active'>CoffeeScript</a></li>\n" +
             "</ul>\n" +
         "</div>\n" +
         "<div id='output' data-border-style='none' data-header='true' style='height: 139px;'>\n" +
-            "<div id='js-box' class='code-box'></div>\n" +
-            "<div id='cs-box' class='code-box active'></div>\n" +
+            "<div id='js-box" + id + "' class='code-box js-box'></div>\n" +
+            "<div id='cs-box" + id + "' class='code-box cs-box active'></div>\n" +
         "</div>\n";
     
     // Get code to be converted
@@ -77,29 +79,29 @@ function cs2js(cs_element) {
     cs_element.html(widget);
     
     // Add javascript code
-    cs_element.find("#js-box").html("\n" + compileReverse(cs_code).code);
+    cs_element.find("#js-box" + id).html("\n" + compileReverse(cs_code).code);
     
     // Add coffeescript code
-    cs_element.find("#cs-box").html(cs_code);
+    cs_element.find("#cs-box" + id).html(cs_code);
 }
 
-function addClickListeners() {       
-    $("#js-link").click(function () {
-        $('#js-link').addClass('active');
-        $('#js-box').addClass('active');
-        $('#cs-link').removeClass('active');
-        $('#cs-box').removeClass('active');
+function addClickListeners(id) {       
+    $("#js-link" + id).click(function () {
+        $('#js-link' + id).addClass('active');
+        $('#js-box' + id).addClass('active');
+        $('#cs-link' + id).removeClass('active');
+        $('#cs-box' + id).removeClass('active');
     });
 
-    $("#cs-link").click(function () {
-        $('#cs-link').addClass('active');
-        $('#cs-box').addClass('active');
-        $('#js-link').removeClass('active');
-        $('#js-box').removeClass('active');
+    $("#cs-link" + id).click(function () {
+        $('#cs-link' + id).addClass('active');
+        $('#cs-box' + id).addClass('active');
+        $('#js-link' + id).removeClass('active');
+        $('#js-box' + id).removeClass('active');
     });
     
-    configureEditor("js-box", "javascript");
-    configureEditor("cs-box", "coffee");      
+    configureEditor("js-box" + id, "javascript");
+    configureEditor("cs-box" + id, "coffee");      
 };
 
 function configureEditor(editor_id, mode) {

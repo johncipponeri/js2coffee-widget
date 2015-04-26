@@ -67,12 +67,12 @@ pre {
 }
 /* End Arrow */
 
-#cs-box.active, #js-box.active {
+.cs-box.active, .js-box.active {
   display: block;
   height: 100%;
 }
 
-#cs-box, #js-box {
+.cs-box, .js-box {
   display: none;
 }
 
