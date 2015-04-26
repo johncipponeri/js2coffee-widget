@@ -1,33 +1,33 @@
 // Document Ready (Run First)
-$(function() {
+$(function () {
     // Ace v1.1.9
-    addScript('https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.9/ace.js');    
+    addScript('https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.9/ace.js');
 
     // coffee-script v1.9.0
     addScript('http://cdn.rawgit.com/jashkenas/coffeescript/1.9.0/extras/coffee-script.js');
-    
+
     // js2coffee v2.0.3
-    addScript('http://cdn.rawgit.com/js2coffee/js2coffee/v2.0.3/dist/js2coffee.js');    
+    addScript('http://cdn.rawgit.com/js2coffee/js2coffee/v2.0.3/dist/js2coffee.js');
 });
 
 function addScript(src) {
     var script = document.createElement("script");
     script.type = "text/javascript";
     script.src = src;
-    
+
     $("head").append(script);
 }
 
 // Window Load (Run Second)
-$(window).load(function() {
+$(window).load(function () {
     // Any JS examples?
     //if ($(".j2cw-js").length > 0)
     //    js2cs($(".j2cw-js"));
-    $(".j2cw-js").each(function(i, elem) {
-        js2cs($(this), i); 
+    $(".j2cw-js").each(function (i, elem) {
+        js2cs($(this), i);
         addClickListeners(i);
     });
-    
+
     // Any CS examples?
     //if ($(".j2cw-cs").length > 0)
     //    cs2js($(".j2cw-cs"));
@@ -36,28 +36,28 @@ $(window).load(function() {
 function js2cs(js_element, id) {
     var widget =
         "<div class='embed-nav group' id='embed-nav'>\n" +
-            "<ul style='margin: 0'>\n" +
-                "<li><a id='js-link" + id + "' class='active'>JavaScript</a></li>\n" +
-                "<li><a id='cs-link" + id + "'>CoffeeScript</a></li>\n" +
-            "</ul>\n" +
+        "<ul style='margin: 0'>\n" +
+        "<li><a id='js-link" + id + "' class='active'>JavaScript</a></li>\n" +
+        "<li><a id='cs-link" + id + "'>CoffeeScript</a></li>\n" +
+        "</ul>\n" +
         "</div>\n" +
         "<div id='output' data-border-style='none' data-header='true'>\n" +
-            "<div id='js-box" + id + "' class='code-box js-box active'></div>\n" +
-            "<div id='cs-box" + id + "' class='code-box cs-box'></div>\n" +
+        "<div id='js-box" + id + "' class='code-box js-box active'></div>\n" +
+        "<div id='cs-box" + id + "' class='code-box cs-box'></div>\n" +
         "</div>\n";
-    
+
     // Get code to be converted
     var js_code = "\n" + js_element.text();
-    
+
     // Replace code with widget
     js_element.html(widget);
-    
+
     // Add javascript code
     js_element.find("#js-box" + id).html(js_code);
-    
+
     // Add coffeescript code
     js_element.find("#cs-box" + id).html("\n" + compile(js_code).code);
-    
+
     // Limit output height
     js_element.find("#output").height(js_element.height() - js_element.find("#embed-nav").height());
 }
@@ -65,33 +65,33 @@ function js2cs(js_element, id) {
 function cs2js(cs_element) {
     var widget =
         "<div class='embed-nav group' id='embed-nav'>\n" +
-            "<ul style='margin: 0'>\n" +
-                "<li><a id='js-link" + id + "'>JavaScript</a></li>\n" +
-                "<li><a id='cs-link" + id + "' class='active'>CoffeeScript</a></li>\n" +
-            "</ul>\n" +
+        "<ul style='margin: 0'>\n" +
+        "<li><a id='js-link" + id + "'>JavaScript</a></li>\n" +
+        "<li><a id='cs-link" + id + "' class='active'>CoffeeScript</a></li>\n" +
+        "</ul>\n" +
         "</div>\n" +
         "<div id='output' data-border-style='none' data-header='true'>\n" +
-            "<div id='js-box" + id + "' class='code-box js-box'></div>\n" +
-            "<div id='cs-box" + id + "' class='code-box cs-box active'></div>\n" +
+        "<div id='js-box" + id + "' class='code-box js-box'></div>\n" +
+        "<div id='cs-box" + id + "' class='code-box cs-box active'></div>\n" +
         "</div>\n";
-    
+
     // Get code to be converted
     var cs_code = "\n" + cs_element.text();
-    
+
     // Replace code with widget
     cs_element.html(widget);
-        
+
     // Add javascript code
     cs_element.find("#js-box" + id).html("\n" + compileReverse(cs_code).code);
-    
+
     // Add coffeescript code
     cs_element.find("#cs-box" + id).html(cs_code);
-    
+
     // Limit output height
     cs_element.find("#output").height(cs_element.height() - cs_element.find("#embed-nav").height());
 }
 
-function addClickListeners(id) {       
+function addClickListeners(id) {
     $("#js-link" + id).click(function () {
         $('#js-link' + id).addClass('active');
         $('#js-box' + id).addClass('active');
@@ -105,9 +105,9 @@ function addClickListeners(id) {
         $('#js-link' + id).removeClass('active');
         $('#js-box' + id).removeClass('active');
     });
-    
+
     configureEditor("js-box" + id, "javascript");
-    configureEditor("cs-box" + id, "coffee");      
+    configureEditor("cs-box" + id, "coffee");
 };
 
 function configureEditor(editor_id, mode) {
@@ -120,74 +120,76 @@ function configureEditor(editor_id, mode) {
 }
 
 /*
-* Function extracted from: http://js2.coffee/assets/app.js
-* js2coffee source: https://github.com/js2coffee/js2coffee
-*
-* compiles code from js to coffee.
-* returns the code (output js), error (Error object, if any), and output 
-* of js2coffee() (used later for warnings).
-*/
+ * Function extracted from: http://js2.coffee/assets/app.js
+ * js2coffee source: https://github.com/js2coffee/js2coffee
+ *
+ * compiles code from js to coffee.
+ * returns the code (output js), error (Error object, if any), and output
+ * of js2coffee() (used later for warnings).
+ */
 
 function compile(input) {
     var output, error, code;
 
     try {
-      output = js2coffee.build(input);
-      code = output.code;
-      code += "\n# ---\n# generated by js2coffee " +
-        js2coffee.version;
+        output = js2coffee.build(input);
+        code = output.code;
+        code += "\n# ---\n# generated by js2coffee " +
+            js2coffee.version;
     } catch (err) {
-      error = err;
-      if (!err.start) throw err;
+        error = err;
+        if (!err.start) throw err;
     }
 
     return {
-      code: code,
-      error: error,
-      warnings: output && output.warnings 
+        code: code,
+        error: error,
+        warnings: output && output.warnings
     };
 }
 
 /*
-* Function extracted from: http://js2.coffee/assets/app.js
-* js2coffee source: https://github.com/js2coffee/js2coffee
-*
-* compiles coffee to js code.
-* returns output similar to `compile`
-*/
+ * Function extracted from: http://js2.coffee/assets/app.js
+ * js2coffee source: https://github.com/js2coffee/js2coffee
+ *
+ * compiles coffee to js code.
+ * returns output similar to `compile`
+ */
 
 function compileReverse(input) {
     var output, error, code;
 
     try {
-      code = CoffeeScript.compile(input, { bare: true });
-      code += "\n// ---\n// generated by coffee-script " +
-        CoffeeScript.VERSION;
-      code = code.trim();
+        code = CoffeeScript.compile(input, {
+            bare: true
+        });
+        code += "\n// ---\n// generated by coffee-script " +
+            CoffeeScript.VERSION;
+        code = code.trim();
     } catch (err) {
-      if (!err.location) throw err;
+        if (!err.location) throw err;
 
-      // Convert to js2coffee-style errors
-      err.description = err.message;
-      err.start = {
-        line: err.location.first_line + 1,
-        column: err.location.first_column
-      };
-        
-      if (err.location.last_line) {
-        err.end = {
-          line: err.location.last_line + 1,
-          column: err.location.last_column + 1
+        // Convert to js2coffee-style errors
+        err.description = err.message;
+        err.start = {
+            line: err.location.first_line + 1,
+            column: err.location.first_column
         };
-      }
-        
-      console.error(err);
 
-      error = err;
+        if (err.location.last_line) {
+            err.end = {
+                line: err.location.last_line + 1,
+                column: err.location.last_column + 1
+            };
+        }
+
+        console.error(err);
+
+        error = err;
     }
 
     return {
-      code: code,
-      error: error 
+        code: code,
+        error: error
     };
 }
