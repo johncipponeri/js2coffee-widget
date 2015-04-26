@@ -20,7 +20,7 @@ By specifying either js or cs as an extension of the class name you will specify
 
 Now unlike ever before you can easily and concisely support both javascript and coffeescript snippets in your tutorials and articles without even trying! This was motivated by frequent frustrations caused by doing this conversion by hand multiple times a day.
 
-![alt text](https://github.com/johncipponeri/js2coffee-widget/demo/screenshot.png "Screenshot")
+![alt text](https://raw.githubusercontent.com/johncipponeri/js2coffee-widget/master/demo/screenshot.png "Screenshot")
 
 ## Installation
 
